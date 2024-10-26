@@ -75,7 +75,7 @@ def main() -> None:
     model.solve(solver)
 
     # 変数の値を表示する。
-    info = {data["曲名"][i]: int(x[i].value()) for i in data.index if x[i].value() > 0}
+    info = {data["曲名"][i]: int(round(x[i].value())) for i in data.index if x[i].value() > 0}
     logger.info(f"Song list: {info}")  # noqa: G004
     logger.info(f"Total time: {model.objective.value():.1f}")  # noqa: G004
     logger.info(f"Total combo: {sum(data['コンボ数'][i] * x[i].value() for i in data.index):.0f}")  # noqa: G004
