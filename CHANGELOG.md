@@ -7,10 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- 曲追加 ([#2](https://github.com/UltraSoundUS/taiko-rta/pull/2))
+
+### Fixed
+
+- 浮動小数点の誤差を考慮していなかった問題修正 ([#3](https://github.com/UltraSoundUS/taiko-rta/pull/3))
+
 ## [0.1.0] - 2024-10-26
 
 ### Added
 
 - 最初の実装 ([#1](https://github.com/UltraSoundUS/taiko-rta/pull/1))
 
+[Unreleased]: https://github.com/UltraSoundUS/taiko-rta/compare/0.1.0...HEAD
 [0.1.0]: https://github.com/UltraSoundUS/taiko-rta/releases/tag/0.1.0
