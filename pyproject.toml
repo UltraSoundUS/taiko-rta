@@ -1,0 +1,41 @@
+[project]
+name = "taiko_rta"
+version = "0.1.0"
+description = "太鼓の達人 RTA の最適化をする。"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2.3",
+    "pulp>=2.9.0",
+    "rich>=13.9.3",
+]
+
+
+[tool.ruff]
+# Group violations by containing file.
+output-format = "grouped"
+# Allow lines to be as long as 100.
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "ANN101",  # [[deprecated]]
+    "ANN102",  # [[deprecated]]
+    "COM812",  # [[conflicted]]
+    "ISC001",  # [[conflicted]]
+    "D415",    # Period
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.uv]
+dev-dependencies = [
+    "pre-commit>=4.0.1",
+    "pytest>=8.3.3",
+    "ruff>=0.7.0",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["D104"]
