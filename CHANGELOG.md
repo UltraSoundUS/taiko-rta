@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - 同じ曲を1回だけ選べるオプション追加 ([#5](https://github.com/UltraSoundUS/taiko-rta/pull/5))
+- 曲情報追加 ([#6](https://github.com/UltraSoundUS/taiko-rta/pull/6))
 
 ## [0.1.1] - 2024-10-26
 
