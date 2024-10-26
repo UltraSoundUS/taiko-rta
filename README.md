@@ -33,7 +33,7 @@ SCIP をインストールする。[SCIP 公式ページ](https://www.scipopt.or
 
 ### ルートを求める
 
-良 10,000 カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
+10,000良 カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
 
 ```bash
 python src/solve.py -c 10000 -i 30 csv/most_difficult_songs.csv
@@ -42,7 +42,27 @@ python src/solve.py -c 10000 -i 30 csv/most_difficult_songs.csv
 以下のように出力される。
 
 ```log
-[Oct 26 20:18:14] INFO     Song list: {'第六天魔王(裏譜面)': 3, 'Infinite Rebellion': 2, '第六天魔王': 1}      solve.py:76
-                  INFO     Total time: 1045.7                                                                  solve.py:77
-                  INFO     Total combo: 10054                                                                  solve.py:78
+[Oct 26 20:18:14] INFO     Song list: {'第六天魔王(裏譜面)': 3, 'Infinite
+                           Rebellion': 3, '第六天魔王': 1}
+                  INFO     Total time: 1045.7
+                  INFO     Total combo: 10054
+```
+
+10,000良 (no duplicate) カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
+
+```bash
+python src/solve.py -c 10000 -i 30 -nd csv/most_difficult_songs.csv
+```
+
+以下のように出力される。
+
+```log
+[Oct 27 02:30:14] INFO     Song list: {'第六天魔王(裏譜面)': 1, 'Infinite
+                           Rebellion': 1, '幽玄ノ乱': 1, 'Central Dogma
+                           Pt.1(裏譜面)': 1, '赤と白薔薇の魔女': 1,
+                           'ダンガンノーツ(裏譜面)': 1,
+                           '憎悪と醜悪の花束(裏譜面)': 1, 'Calamity
+                           Fortune(裏譜面)': 1}
+                  INFO     Total time: 1185.4
+                  INFO     Total combo: 10072
 ```

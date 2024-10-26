@@ -23,11 +23,14 @@ def parse_args() -> argparse.Namespace:
         argparse.Namespace: パースした結果のオブジェクト。
     """
     parser = argparse.ArgumentParser(description="太鼓の達人の RTA のルートを求めるプログラム。")
-    parser.add_argument("path", type=Path, help="曲の情報が記載された CSV ファイル。")
+    parser.add_argument("csv_file", type=Path, help="曲の情報が記載された CSV ファイル。")
     parser.add_argument(
         "-c", "--combo", type=int, default=20_000, help="RTA レギュレーションに必要なコンボ数。"
     )
     parser.add_argument("-i", "--interval", type=int, default=20, help="曲と曲とのインターバル。")
+    parser.add_argument(
+        "-nd", "--no-duplicate", action="store_true", help="同じ曲を複数回演奏しない。"
+    )
 
     return parser.parse_args()
 
@@ -41,7 +44,7 @@ def main() -> None:
     solver = pulp.SCIP_CMD("bin/scip.exe", msg=False)
 
     # CSV からデータを読み込む。
-    data = pd.read_csv(args.path, comment="#")
+    data = pd.read_csv(args.csv_file, comment="#")
 
     # 演奏時間を計算する。
     data["演奏時間"] = data["音符数-1"] / data["平均密度"]
@@ -58,7 +61,11 @@ def main() -> None:
     # 変数を作成する。
     # 曲を何回演奏するかを表す変数。
     # 0 以上の整数値。
-    x = pulp.LpVariable.dicts("x", data.index, lowBound=0, cat=pulp.LpInteger)
+    x = (
+        pulp.LpVariable.dicts("x", data.index, lowBound=0, upBound=1, cat=pulp.LpInteger)
+        if args.no_duplicate
+        else pulp.LpVariable.dicts("x", data.index, lowBound=0, cat=pulp.LpInteger)
+    )
 
     # 曲を演奏している時間を最小化する。
     playing_time = pulp.lpSum(data["演奏時間"][i] * x[i] for i in data.index)
