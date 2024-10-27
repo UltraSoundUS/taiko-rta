@@ -1,4 +1,4 @@
-# 太鼓の達人の RTA のルートを求める。
+# 太鼓の達人の RTA のルートを求める
 
 太鼓の達人の n 良の RTA のルートを求める。
 
@@ -33,7 +33,11 @@ SCIP をインストールする。[SCIP 公式ページ](https://www.scipopt.or
 
 ### ルートを求める
 
-10,000良 カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
+以下のように実行する。
+
+詳細のオプションは `python src/solve.py --help` で確認できる。
+
+#### 10,000良 カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
 
 ```bash
 python src/solve.py -c 10000 -i 30 csv/level10.csv
@@ -41,14 +45,27 @@ python src/solve.py -c 10000 -i 30 csv/level10.csv
 
 以下のように出力される。
 
-```log
-[Oct 26 20:18:14] INFO     Song list: {'第六天魔王(裏譜面)': 3, 'Infinite
-                           Rebellion': 3, '第六天魔王': 1}
-                  INFO     Total time: 1045.7
-                  INFO     Total combo: 10054
+```json
+{
+    "第六天魔王(裏譜面)": 3,
+    "Infinite Rebellion": 3,
+    "第六天魔王": 1
+}
 ```
 
-10,000良 (no duplicate) カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
+仮に json ファイルで保存したい場合は、以下のようにする。
+
+```bash
+python src/solve.py -c 10000 -i 30 -o output.json csv/level10.csv
+```
+
+`output.json` に以下のように保存される。
+
+```json
+{"第六天魔王(裏譜面)": 3, "Infinite Rebellion": 3, "第六天魔王": 1}
+```
+
+#### 10,000良 (no duplicate) カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
 
 ```bash
 python src/solve.py -c 10000 -i 30 -nd csv/level10.csv
@@ -56,13 +73,15 @@ python src/solve.py -c 10000 -i 30 -nd csv/level10.csv
 
 以下のように出力される。
 
-```log
-[Oct 27 02:30:14] INFO     Song list: {'第六天魔王(裏譜面)': 1, 'Infinite
-                           Rebellion': 1, '幽玄ノ乱': 1, 'Central Dogma
-                           Pt.1(裏譜面)': 1, '赤と白薔薇の魔女': 1,
-                           'ダンガンノーツ(裏譜面)': 1,
-                           '憎悪と醜悪の花束(裏譜面)': 1, 'Calamity
-                           Fortune(裏譜面)': 1}
-                  INFO     Total time: 1185.4
-                  INFO     Total combo: 10072
+```json
+{
+    "第六天魔王(裏譜面)": 1,
+    "Infinite Rebellion": 1,
+    "幽玄ノ乱": 1,
+    "第六天魔王": 1,
+    "Central Dogma Pt.1(裏譜面)": 1,
+    "モノクロボイス(裏譜面)": 1,
+    "赤と白薔薇の魔女": 1,
+    "冷凍庫CJ ～嗚呼面太鼓ブラザーズ～": 1
+}
 ```

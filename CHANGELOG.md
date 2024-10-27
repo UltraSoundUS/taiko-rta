@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - CSV ファイルを作成するスクリプト追加 ([#7](https://github.com/UltraSoundUS/taiko-rta/pull/7))
+- 結果を保存できるようにし、保存しない場合は標準出力に表示するように ([#8](https://github.com/UltraSoundUS/taiko-rta/pull/8))
 
 ## [0.2.0] - 2024-10-27
 
