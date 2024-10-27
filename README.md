@@ -36,7 +36,7 @@ SCIP をインストールする。[SCIP 公式ページ](https://www.scipopt.or
 10,000良 カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
 
 ```bash
-python src/solve.py -c 10000 -i 30 csv/most_difficult_songs.csv
+python src/solve.py -c 10000 -i 30 csv/level10.csv
 ```
 
 以下のように出力される。
@@ -51,7 +51,7 @@ python src/solve.py -c 10000 -i 30 csv/most_difficult_songs.csv
 10,000良 (no duplicate) カテゴリで、曲と曲のインターバルを 30 秒と見積もったときのルートを求める。
 
 ```bash
-python src/solve.py -c 10000 -i 30 -nd csv/most_difficult_songs.csv
+python src/solve.py -c 10000 -i 30 -nd csv/level10.csv
 ```
 
 以下のように出力される。
