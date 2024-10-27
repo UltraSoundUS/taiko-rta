@@ -26,6 +26,7 @@ def parse_args() -> argparse.Namespace:
         "-c", "--combo", type=int, default=20_000, help="RTA レギュレーションに必要なコンボ数。"
     )
     parser.add_argument("-i", "--interval", type=int, default=20, help="曲と曲とのインターバル。")
+    parser.add_argument("-o", "--output", type=Path, help="結果を出力するファイル。")
     parser.add_argument("-v", "--verbose", action="store_true", help="詳細な情報を表示する。")
     parser.add_argument(
         "-nd", "--no-duplicate", action="store_true", help="同じ曲を複数回演奏しない。"
@@ -88,12 +89,23 @@ def main() -> None:
 
     # モデルを解く。
     model.solve(solver)
+    if pulp.LpStatus[model.status] != "Optimal":
+        logger.warning("No optimal solution was found.")
 
     # 変数の値を表示する。
     info = {data["曲名"][i]: int(round(x[i].value())) for i in data.index if x[i].value() > 0}
-    logger.info(f"Song list: {info}")  # noqa: G004
+    logger.info(f"Status: {pulp.LpStatus[model.status]}")  # noqa: G004
+    logger.info(f"Number of songs: {len(info)}")  # noqa: G004
     logger.info(f"Total time: {model.objective.value():.1f}")  # noqa: G004
     logger.info(f"Total combo: {sum(data['コンボ数'][i] * x[i].value() for i in data.index):.0f}")  # noqa: G004
+    logger.info(f"Song list: {info}")  # noqa: G004
+
+    # 結果をファイルに出力する。
+    if args.output is None:
+        json.dump(info, sys.stdout, indent=4, ensure_ascii=False)
+    else:
+        with args.output.open("w", encoding="utf_8") as f:
+            json.dump(info, f, ensure_ascii=False)
 
 
 if __name__ == "__main__":
